@@ -44,3 +44,21 @@ type 'a node =
   | One of 'a 
   | Many of 'a node list
 
+let t1 = [One "a"; Many [One "b"; Many [One "c" ;One "d"]; One "e"]];;
+
+let flatten t =
+    let rec foo t acc =
+    match t with 
+    | [] -> acc
+    | One v::vt -> foo t (v::acc)   (*single item in list =*)
+    | Many p::pt -> foo t (foo p acc)
+    in foo t []
+
+
+
+
+
+
+
+
+
